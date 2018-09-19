@@ -1,7 +1,8 @@
-# Example application to examine codeblocks batch build stalling
-# See also: http://forums.codeblocks.org/index.php/topic,22824.0.html
+### Example application to examine codeblocks batch build stalling
 
-# Steps to reproduce
+See also: http://forums.codeblocks.org/index.php/topic,22824.0.html
+
+### Steps to reproduce
 
 - Unzip sources
 - Download boost sources from https://dl.bintray.com/boostorg/release/1.68.0/source/
