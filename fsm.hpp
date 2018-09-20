@@ -16,6 +16,8 @@
 #include <boost/msm/back/state_machine.hpp>
 #include <boost/msm/front/state_machine_def.hpp>
 
+#include "produce_compiler_warnings.h"
+
 using namespace std;
 namespace msm = boost::msm;
 namespace mpl = boost::mpl;
@@ -201,5 +203,6 @@ namespace  // Concrete FSM implementation
             cout << "candidate song:" << *it << endl;
         }
 
+        produce_compiler_warnings<50>();
     }
 }
