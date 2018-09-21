@@ -5,7 +5,8 @@
 
 using namespace std;
 
-//!\todo Process cannot be killed when run as compiler from Codeblocks..
+//!\todo Process cannot be killed when run as compiler from Codeblocks.. signal handling doesn't work.
+//!\todo Commandline argument parsing to configure the parameters
 
 int quit = 0;
 void signal_handler(int sig)
@@ -24,17 +25,15 @@ int main(int argc, char *argv[])
     
     cout << "Trust me, I'm a compiler!" << endl;
     
-//    int n_warnings = 10;
-//    int work_us = 0;
-//    int sleep_us = 1000000;
-    int n_warnings = 5;
-    int work_us = 1000000;
-    int sleep_us = 100;
-    int timeout_s = 10;
+    // In each loop...
+    int n_warnings = 5;     // ... output n warning messages 
+    int work_us = 1000000;  // ... work for n microseconds in a busy loop to consume cpu time
+    int sleep_us = 100;     // ... sleep for n microseconds.
+    int timeout_s = 10;     // Keep running for n seconds.
 
     const string warning("D:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 8]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 9]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 9]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 10]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 10]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/fsm.hpp:206:39:   required from here\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:10:10: warning: unused variable 'baz' [-Wunused-variable]\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h: In instantiation of 'void produce_compiler_warnings() [with int i = 1]':\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 2]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 2]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 3]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 3]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 4]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   [ skipping 8 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]");
 
-    /*
+    /* TODO: commandline argument parsing
     if (argc > 1)
     {
         istringstream ss(argv[1]);
