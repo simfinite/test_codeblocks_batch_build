@@ -25,13 +25,20 @@ int main(int argc, char *argv[])
     
     cout << "Trust me, I'm a compiler!" << endl;
     
+    // With this setting, the problem was reproducible with 2, 3 and 4 build jobs on a Windows 7, i7 quad-core:
     // In each loop...
+//    int n_warnings = 1;     // ... output n warning messages 
+//    int work_us = 100000;  // ... work for n microseconds in a busy loop to consume cpu time
+//    int sleep_us = 0;     // ... sleep for n microseconds.
+//    int timeout_s = 2;     // Keep running for n seconds.
 
-    // With this setting, the problem was reproducible with 2 and 4 build jobs on a Windows 7, i7 quad-core
+    // With this setting (no busy loop), the problem was reproducible with 4 build jobs on a Windows 7, i7 quad-core:
+    // In each loop...
     int n_warnings = 1;     // ... output n warning messages 
-    int work_us = 50000;  // ... work for n microseconds in a busy loop to consume cpu time
-    int sleep_us = 0;     // ... sleep for n microseconds.
-    int timeout_s = 2;     // Keep running for n seconds.
+    int work_us = 0;  // ... work for n microseconds in a busy loop to consume cpu time
+    int sleep_us = 500000;     // ... sleep for n microseconds.
+    int timeout_s = 5;     // Keep running for n seconds.
+
 
     const string warning("D:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 8]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 9]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 9]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 10]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 10]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/fsm.hpp:206:39:   required from here\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:10:10: warning: unused variable 'baz' [-Wunused-variable]\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h: In instantiation of 'void produce_compiler_warnings() [with int i = 1]':\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 2]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 2]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 3]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   required from 'void produce_compiler_warnings() [with int i = 3]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:18:35:   required from 'void bar() [with int i = 4]'\nD:/SomeFolder/ThatLeads/ToMy/TestProject/AndDoesNotExist/InReality/produce_compiler_warnings.h:9:11:   [ skipping 8 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]");
 
@@ -87,7 +94,5 @@ int main(int argc, char *argv[])
         }
     }
 
-    // Sleep for 5 seconds before exiting
-//    this_thread::sleep_for(chrono::seconds(5));
     return 0;
 }
